@@ -1,13 +1,40 @@
-import Link from "next/link";
+'use client';
 
-async function fetchData() {
-  const res = await fetch('https://jsonplaceholder.typicode.com/posts');
-  const result = await res.json();
-  return result;
-}
+// import Link from "next/link";
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useMyContext } from './provider/context';
 
-export default async function Home() {
-  const posts = await fetchData();
+// async function fetchData() {
+//   const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+//   const result = await res.json();
+//   return result;
+// }
+
+export default function Home() {
+  const [posts, setPosts] = useState([]);
+  const { value, setValue } = useMyContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+      const posts = await res.json();
+      setPosts(posts);
+    }
+    fetchData();
+  }, []);
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    const id = Number(event.currentTarget.dataset.key);
+    const current = posts.filter(item => item.id === id);
+    if (current[0]) {
+      setValue(current[0]);
+      router.push(`/post/${id}`)
+    }
+  };
+
   return (
     <div>
       <h1>Main Page</h1>
@@ -17,7 +44,8 @@ export default async function Home() {
           <div key={item.id} className="post">
             <h2>{item.title}</h2>
             <p>{item.body}</p>
-            <Link href={`/post/${item.id}?data=${data}`}>Detail</Link>
+            {/* <Link href={`/post/${item.id}?data=${data}`}>Detail</Link> */}
+            <a data-key={item.id} href="#" onClick={handleClick}>Details</a>
           </div>
         )
       })}

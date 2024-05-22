@@ -1,14 +1,21 @@
+'use client';
 
-const Post = ({ params, searchParams }) => {
-  const query = JSON.parse(searchParams.data)
+import { useMyContext } from '../../provider/context';
+import { useRouter } from 'next/navigation';
+import Post from '@/app/components/post';
+
+const Postpage = ({ params }) => {
+  const { value } = useMyContext();
+  const router = useRouter();
+
+  if (value === null) {
+    router.push('/');
+    return (<></>)
+  }
+
   return (
-    <div>
-      Post {params.id} : 
-      <p>User Id : {query.userId}</p>
-      <p><strong>{query.title}</strong></p>
-      <p>{query.body}</p>
-    </div>
+    <Post post={value} />
   )
 }
 
-export default Post
+export default Postpage
