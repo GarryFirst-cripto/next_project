@@ -1,0 +1,32 @@
+body {
+  background-color: #5a5a5a;
+  color: #badd52;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  background-color: black;
+  border-bottom: 2px solid #ff5c5c;
+  padding: 20px 50px
+}
+
+header a {
+  color: aquamarine;
+  margin-left: 20px;
+}
+
+.container {
+  background-color: #333;
+  padding: 50px;
+}
+
+.post {
+  font-size: 12px;
+  background-color: antiquewhite;
+  color: black;
+  width: 40%;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 4px;
+}
