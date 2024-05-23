@@ -1,16 +1,20 @@
+'use client';
+
+import { useMyContext } from '../../provider/context';
+import { useRouter } from 'next/navigation';
 import Post from '@/app/components/post';
 
-async function fetchData(id) {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
-  const result = await res.json();
-  return result;
-}
+const Postpage = ({ params }) => {
+  const { value } = useMyContext();
+  const router = useRouter();
 
-const Postpage = async ({ params }) => {
-  const post = await fetchData(params.id);
+  if (value === null) {
+    router.push('/');
+    return (<></>)
+  }
 
   return (
-    <Post post={post} />
+    <Post post={value} />
   )
 }
 
