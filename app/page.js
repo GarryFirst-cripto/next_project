@@ -1,6 +1,9 @@
 import Link from "next/link";
+import getCoocies from './components/cookies';
+import delay from "./components/delay";
 
 async function fetchData() {
+  await delay(500)
   const res = await fetch('https://jsonplaceholder.typicode.com/posts');
   const result = await res.json();
   return result;
@@ -9,6 +12,7 @@ async function fetchData() {
 export default async function Home() {
 
   const posts = await fetchData();
+  // getCoocies();
 
   return (
     <div>

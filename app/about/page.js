@@ -1,4 +1,14 @@
-export default function About() {
+import delay from '../components/delay';
+
+export const metadata = {
+  title: "Page About Us",
+  description: "Page About Us",
+};
+
+export default async function About() {
+
+  await delay(3000);
+
   return (
     <div>
       <h1>Page "About"</h1>
