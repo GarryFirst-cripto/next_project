@@ -1,8 +1,8 @@
 const loading = () => {
   return (
-    <loading>
+    <div className="loading">
       Loading (about) ...
-    </loading>
+    </div>
   )
 }
 

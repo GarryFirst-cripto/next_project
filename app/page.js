@@ -1,32 +1,57 @@
-import Link from "next/link";
-import getCoocies from './components/cookies';
-import delay from "./components/delay";
+import Head from "next/head";
+import Heading from "./components/Heading";
+import Socials from "./components/Socials";
+import styles from "../styles/Home.module.scss";
 
-async function fetchData() {
-  await delay(500)
-  const res = await fetch('https://jsonplaceholder.typicode.com/posts');
-  const result = await res.json();
-  return result;
+// export const getStaticProps = async () => {
+//   try {
+//     const response = await fetch(`${process.env.API_HOST}/socials`);
+//     const data = await response.json();
+
+//     if (!data) {
+//       return {
+//         notFound: true,
+//       }
+//     }
+
+//     return {
+//       props: { socials: data },
+//     }
+//   } catch {
+//     return {
+//       props: { socials: null },
+//     }
+//   }
+// };
+
+export async function generateStaticParams() {
+  try {
+    const socials = await fetch(`${process.env.API_HOST}/socials`)
+      .then(data => data.json());
+
+    if (!socials) {
+      return {
+        notFound: true,
+      }
+    }
+
+    return { props: { socials }}   
+  } catch {
+    return {
+      props: { socials: null },
+    }
+  }
+
 }
 
-export default async function Home() {
+const Home = ({ socials }) => (
+  <div className={styles.wrapper}>
+    <Head>
+      <title>Home</title>
+    </Head>
+    <Heading text="Next.js Application" />
+    <Socials socials={socials} />
+  </div>
+);
 
-  const posts = await fetchData();
-  // getCoocies();
-
-  return (
-    <div>
-      <h1>Main Page</h1>
-      {posts.map(item => {
-        const data = JSON.stringify(item);
-        return (
-          <div key={item.id} className="post">
-            <h2>{item.title}</h2>
-            <p>{item.body}</p>
-            <Link href={`/post/${item.id}`}>Detail</Link>
-          </div>
-        )
-      })}
-    </div>
-  )
-}
+export default Home;
