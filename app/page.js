@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Heading from "./components/Heading";
 import Socials from "./components/Socials";
-import styles from "../styles/Home.module.scss";
 
 // export const getStaticProps = async () => {
 //   try {
@@ -45,10 +44,7 @@ export async function generateStaticParams() {
 }
 
 const Home = ({ socials }) => (
-  <div className={styles.wrapper}>
-    <Head>
-      <title>Home</title>
-    </Head>
+  <div>
     <Heading text="Next.js Application" />
     <Socials socials={socials} />
   </div>
