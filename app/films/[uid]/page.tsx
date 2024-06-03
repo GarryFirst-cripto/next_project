@@ -3,12 +3,12 @@ import {getAllFilms} from "@/app/actions/getAllFilms"
 
 interface Params {
     params: {
-        filmId: number
+        uid: number
     }
 }
 
-export default async function Film({params: {filmId}}: Params) {
-    const film = await getFilm(filmId)
+export default async function Film({params: {uid}}: Params) {
+    const film = await getFilm(uid)
 
     return (
         <div>
@@ -21,6 +21,6 @@ export async function generateStaticParams() {
     const films = await getAllFilms()
 
     return films.result.map((film) => ({
-        filmId: film.uid
+        uid: film.uid
     }))
 }
