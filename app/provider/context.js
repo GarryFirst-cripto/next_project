@@ -35,11 +35,17 @@ export const StoreProvider = ({ children }) => {
     }
   }, []);
 
-  useEffect(() => {
-    if (state.post?.id) {
+  // useEffect(() => {
+  //   if (state.post?.id) {
+  //     localStorage.setItem('store', JSON.stringify(state.post))
+  //   }
+  // }, [state]);
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('beforeunload', function () {
       localStorage.setItem('store', JSON.stringify(state.post))
-    }
-  }, [state]);
+    });
+  }
 
   return (
     <StoreContext.Provider value={{ state, dispatch }}>
