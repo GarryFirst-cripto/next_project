@@ -5,8 +5,8 @@ const Header = () => {
     <header>
       <strong>Next JS</strong>
       <nav>
-        <Link href="/">Home</Link>
-        <Link href="/about">About</Link>
+        <Link className="link" href="/">Home</Link>
+        <Link className="link" href="/about">About</Link>
       </nav>
     </header>
   )

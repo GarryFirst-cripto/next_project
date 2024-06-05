@@ -5,12 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useMyContext } from './provider/context';
 
-// async function fetchData() {
-//   const res = await fetch('https://jsonplaceholder.typicode.com/posts');
-//   const result = await res.json();
-//   return result;
-// }
-
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const { value, setValue } = useMyContext();

@@ -2,7 +2,7 @@
 
 import { useMyContext } from '../../provider/context';
 import { useRouter } from 'next/navigation';
-import Post from '@/app/components/post';
+import Post from '@/app/components/Postinfo';
 
 const Postpage = ({ params }) => {
   const { value } = useMyContext();

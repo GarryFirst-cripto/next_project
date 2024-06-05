@@ -3,6 +3,10 @@ body {
   color: #badd52;
 }
 
+.link {
+  color:#0e702f;
+}
+
 header {
   display: flex;
   justify-content: space-between;
