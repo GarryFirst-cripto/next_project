@@ -1,20 +1,20 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import Post from '@/app/components/Postinfo';
 
-const Postpage = () => {
-  const [value, setValue] = useState(null)
-  
-  // useEffect(() => {
-  //   setValue(state.post); 
-  // }, [state])
+const Postpage = ({ post }) => {
   
   return (
     <>
-      {value && <Post post={value} />}
+      {post && <Post post={post} />}
     </>
   )
 }
 
-export default Postpage
+const mapStateToProps = (state) => ({
+  post: state.post.post,
+});
+
+// Подключение компонента к Redux Store
+export default connect(mapStateToProps, null)(Postpage);

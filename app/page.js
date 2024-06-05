@@ -3,8 +3,9 @@
 // import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 
-export default function Home() {
+function Home({ setPost }) {
   const [posts, setPosts] = useState([]);
   const router = useRouter();
 
@@ -22,7 +23,7 @@ export default function Home() {
     const id = Number(event.currentTarget.dataset.key);
     const current = posts.filter(item => item.id === id);
     if (current[0]) {
-      // dispatch({ type: 'SET_POST', payload: current[0] });
+      setPost(current[0])
       router.push(`/post/${id}`)
     }
   };
@@ -44,3 +45,10 @@ export default function Home() {
     </div>  
   )
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  setPost: (payload) => dispatch({ type: 'SET_POST', payload }),
+});
+
+// Подключение компонента к Redux Store
+export default connect(null, mapDispatchToProps)(Home);
