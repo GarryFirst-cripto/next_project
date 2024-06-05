@@ -3,11 +3,11 @@
 // import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useMyContext } from './provider/context';
+import { useStore } from './provider/context';
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
-  const { value, setValue } = useMyContext();
+  const { state, dispatch } = useStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function Home() {
     const id = Number(event.currentTarget.dataset.key);
     const current = posts.filter(item => item.id === id);
     if (current[0]) {
-      setValue(current[0]);
+      dispatch({ type: 'SET_POST', payload: current[0] });
       router.push(`/post/${id}`)
     }
   };

@@ -1,22 +1,17 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useMyContext } from '../../provider/context';
-// import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useStore } from '../../provider/context';
 import Post from '@/app/components/Postinfo';
 
-const Postpage = ({ params }) => {
-  const { value, setValue } = useMyContext();
-  // const router = useRouter();
-
+const Postpage = () => {
+  const { state } = useStore();
+  const [value, setValue] = useState(null)
+  
   useEffect(() => {
-    const data = localStorage.getItem('pageData');
-    if (!value && data) setValue(JSON.parse(data))
-  }, []);
-  useEffect(() => {
-    if (value) localStorage.setItem('pageData', JSON.stringify(value));
-  }, [value]);
-
+    setValue(state.post); 
+  }, [state])
+  
   return (
     <>
       {value && <Post post={value} />}
