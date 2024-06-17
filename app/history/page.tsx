@@ -17,13 +17,13 @@ export async function generateMetadata() {
 }
 
 export default async function History() {
-  const history = await getHistory()
-  console.log('HISTORY PAGE', history.data) 
+  const history = await getHistory();
+  console.log('HISTORY PAGE', history.data);
   return (
     <main>
-      <h1><strong> History page </strong></h1>
+      <h2><strong> History page </strong></h2>
       <div>History Data: <span>{history.data}</span></div>
-      <Link className='link' href="/" prefetch={true} >Home</Link>
+      <Link className='link' href="/" prefetch={false} >Home</Link>
     </main>
   );
 }

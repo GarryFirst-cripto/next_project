@@ -5,6 +5,12 @@ import { doRevalidate } from "./actions/revalidate";
 // export const dynamic = 'force-dynamic'
 export const revalidate = 10;
 
+export async function generateMetadata() {
+  return {
+    title: 'Main Page',
+  };
+}
+
 export default async function Home() {
   const file = await fs.readFile(process.cwd() + "/data.txt", "utf8");
   console.log('HOME ... PAGE', file)   

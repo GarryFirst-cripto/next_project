@@ -1,8 +1,16 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 // Определение серверного действия
-export async function doRevalidate() {
-  revalidatePath('/', 'page');
+export async function doRevalidate(param: string) {
+  switch (param) {
+    case 'path':
+      revalidatePath('/', 'page');
+      return;
+    case 'tag':
+      revalidateTag('/');
+      return;
+  }
+  
 }

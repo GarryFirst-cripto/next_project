@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 interface Params {
   data: string,
-  revalidate: () => void;
+  revalidate: (param: string) => void;
 }
 
 const HomePage: FC<Params> = ({ data, revalidate }) => {
@@ -17,16 +17,27 @@ const HomePage: FC<Params> = ({ data, revalidate }) => {
   }
 
   const callback = async () => {
-    revalidate();
+    revalidate('path');
   }
   
+  const callbackTag = async () => {
+    revalidate('tag');
+  }
+
+  const prefetchHistoryPage = () => {
+    router.prefetch('/history');
+    console.log('Prefetch')
+  };
+
   return (
     <main>
-      <h1><strong> Main page </strong></h1>
+      <h2 onMouseEnter={prefetchHistoryPage}><strong> Main page </strong></h2>
       <div>{data}</div>
       <Link className='link' href="/history" prefetch={false}>History</Link>
       <br />
       <button onClick={callback}>Revalidate Page</button>
+      <br />
+      <button onClick={callbackTag}>Revalidate Tag</button>
       <br />
       <button onClick={handleRouterClick}>Router Refresh</button>
     </main>
