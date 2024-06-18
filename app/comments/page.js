@@ -11,10 +11,19 @@ async function fetchData() {
   return result;
 }
 
+function searchFilter(entities, search) {
+  return entities.filter(item => item.name.concat(item.body).includes(search));
+}
+
 export default function Home() {
-  const [ comments, setComments ] = useState([]);
-  const [ loading, setLoading ] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [comments, setComments] = useState([]);
+  const [search, setSearch] = useState('');
   
+  function handleSearch(event) {
+    setSearch(event.target.value)
+  }
+
   async function getCommentsList() {
     const comments = await fetchData();
     setComments(comments);
@@ -29,8 +38,11 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Comments Page</h1>
-      {comments.map(item => {
+      <div className="comment-header">
+        <h1>Comments Page</h1>
+        <input type="text" onChange={handleSearch}/>
+      </div>
+      {searchFilter(comments, search).map(item => {
         return (
           <div key={item.id} className="comment">
             <h2>{item.name}</h2>
