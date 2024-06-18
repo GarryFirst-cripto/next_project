@@ -27,9 +27,10 @@ loading {
 .container {
   background-color: #333;
   padding: 50px;
+  padding-top: 10px;
 }
 
-.post {
+.post, .comment {
   font-size: 12px;
   background-color: antiquewhite;
   color: black;
