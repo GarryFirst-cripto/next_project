@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition, useDeferredValue } from "react";
 import delay from "../components/delay";
 import Loading from "../loading";
 
@@ -19,14 +19,22 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
   const [search, setSearch] = useState('');
+  const [isPending, startTransition] = useTransition();
   
+  const [filteredComments, setFilteredComments] = useState(comments)
+  // const values = useDeferredValue(filteredComments);  
   function handleSearch(event) {
-    setSearch(event.target.value)
+    setSearch(event.target.value);
+    startTransition(() => {
+      setFilteredComments(searchFilter(comments, search));
+    })
+    // setFilteredComments(searchFilter(comments, search));
   }
 
   async function getCommentsList() {
     const comments = await fetchData();
     setComments(comments);
+    setFilteredComments(searchFilter(comments, search))
     setLoading(false)
   }
 
@@ -41,8 +49,10 @@ export default function Home() {
       <div className="comment-header">
         <h1>Comments Page</h1>
         <input type="text" onChange={handleSearch}/>
+        {isPending && <h2>RR</h2>}
       </div>
-      {searchFilter(comments, search).map(item => {
+      {filteredComments.map(item => {
+      {/* {values.map(item => { */}
         return (
           <div key={item.id} className="comment">
             <h2>{item.name}</h2>
