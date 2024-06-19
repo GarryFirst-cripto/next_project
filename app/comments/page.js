@@ -19,23 +19,24 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
   const [search, setSearch] = useState('');
-  const [isPending, startTransition] = useTransition();
+  // const [isPending, startTransition] = useTransition();
   
   const [filteredComments, setFilteredComments] = useState(comments)
-  // const values = useDeferredValue(filteredComments);  
+  const values = useDeferredValue(filteredComments);  
   function handleSearch(event) {
     setSearch(event.target.value);
-    startTransition(() => {
-      setFilteredComments(searchFilter(comments, search));
-    })
-    // setFilteredComments(searchFilter(comments, search));
+    // startTransition(() => {
+    //   setFilteredComments(searchFilter(comments, search));
+    // })
+    setFilteredComments(searchFilter(comments, search));
   }
 
   async function getCommentsList() {
     const comments = await fetchData();
     setComments(comments);
     setFilteredComments(searchFilter(comments, search))
-    setLoading(false)
+    // setLoading(false)
+    setTimeout(()=>setLoading(false), 100);
   }
 
   useEffect(() => {
@@ -49,10 +50,10 @@ export default function Home() {
       <div className="comment-header">
         <h1>Comments Page</h1>
         <input type="text" onChange={handleSearch}/>
-        {isPending && <h2>RR</h2>}
+        {/* {isPending && <h2>RR</h2>} */}
       </div>
-      {filteredComments.map(item => {
-      {/* {values.map(item => { */}
+      {/* {filteredComments.map(item => { */}
+      {values.map(item => {
         return (
           <div key={item.id} className="comment">
             <h2>{item.name}</h2>
