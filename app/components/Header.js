@@ -13,6 +13,7 @@ const Header = () => {
         <Link href="/" className={pathname === '/' ? styles.active : undefined}>Home</Link>
         <Link href="/comments" className={pathname === '/comments' ? styles.active : undefined}>Comments</Link>
         <Link href="/about" className={pathname === '/about' ? styles.active : undefined}>About</Link>
+        <Link href="/list" className={pathname === '/list' ? styles.active : undefined}>List (Memo)</Link>
       </nav>
     </header>
   )

@@ -15,7 +15,7 @@ function searchFilter(entities, search) {
   return entities.filter(item => item.name.concat(item.body).includes(search));
 }
 
-export default function Home() {
+export default function Comments() {
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
   const [search, setSearch] = useState('');
@@ -49,7 +49,7 @@ export default function Home() {
     <div>
       <div className="comment-header">
         <h1>Comments Page</h1>
-        <input type="text" onChange={handleSearch}/>
+        <input type="text" onChange={handleSearch} value={search}/>
         {/* {isPending && <h2>RR</h2>} */}
       </div>
       {/* {filteredComments.map(item => { */}

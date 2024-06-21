@@ -40,11 +40,20 @@ loading {
   border-radius: 4px;
 }
 
-.comment-header {
+.comment-header, .list-item {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   width: 550px;
+}
+
+.list-item-text {
+  width: 90px;
+  font-size: 20px;
+  margin-right: 10px;
+  border: 1px solid yellow;
+  border-radius: 5px;
+  padding: 3px;
 }
 
 input[type="text"] {
