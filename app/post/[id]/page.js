@@ -27,7 +27,7 @@ const Postpage = async ({ params }) => {
   const post = await fetchData(params.id);
 
   return (
-    <Post post={post} />
+    <Post post={query} />
   )
 }
 
