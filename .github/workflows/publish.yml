@@ -1,1 +1,23 @@
-# File: .github/workflows/publish.yml name: publish-to-github-pages on: push: branches: - main permissions: contents: read pages: write id-token: write concurrency: group: "pages" cancel-in-progress: false jobs: build: runs-on: ubuntu-latest steps: - name: Checkout 🛎️ uses: actions/checkout@v4 - name: Setup Node.js ⚙️ - Cache dependencies ⚡ - Install dependencies 🔧 uses: ./.github/workflows/setup-node - name: Setup Pages ⚙️ uses: actions/configure-pages@v4 with: static_site_generator: next - name: Build with Next.js 🏗️ run: npx next build - name: Upload artifact 📡 uses: actions/upload-pages-artifact@v3 with: path: ./out deploy: environment: name: github-pages url: ${{ steps.deployment.outputs.page_url }} runs-on: ubuntu-latest needs: build steps: - name: Publish to GitHub Pages 🚀 id: deployment uses: actions/deploy-pages@v4
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Запускать только при пуше в main ветку
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Добавьте шаги для развертывания здесь, например, сборка и публикация на GitHub Pages
+      - name: Build and deploy
+        run: |
+          # Ваши команды для сборки проекта и развертывания
+          # Например, сборка проекта и публикация на GitHub Pages
+          npm install  # Пример для проектов на Node.js
+          npm run build  # Пример для сборки проекта
+          # Ваш скрипт или команды для публикации на GitHub Pages
